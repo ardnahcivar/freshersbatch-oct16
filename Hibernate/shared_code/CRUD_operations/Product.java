@@ -1,5 +1,4 @@
-package com.hibernate.hibernate;
-
+package com.hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,20 +7,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
 @NamedQueries({
 	@NamedQuery(name="getAllProducts",
-			query="from Product")
-	
+			query="from Product"),
+	@NamedQuery(name="deleteAllProducts",
+	query="delete from Product")
 })
 @Entity
 @Table(name="PRODUCT_MASTER")
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="my_seq")
+//	@SequenceGenerator(name="my_seq", sequenceName="db_seq", allocationSize=1)
 	@Column(name="p_id")
 	private Long id;
 	
